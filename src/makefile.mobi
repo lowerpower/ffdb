@@ -1,0 +1,66 @@
+#
+# ARM makefile - Example how to cross compile
+#
+#
+# Tools  /opt/mobilygen/tools/arm-linux-uclibc-r202/i686-linux
+#
+
+CC=/opt/mobilygen/tools/arm-merlin-linux-uclibc/i686-linux/bin/arm-merlin-linux-uclibc-gcc
+STRIP =/opt/mobilygen/tools/arm-merlin-linux-uclibc/i686-linux/bin/arm-merlin-linux-uclibc-strip 
+LIBDIR=/opt/mobilygen/tools/arm-merlin-linux-uclibc/i686-linux/arm-merlin-linux-uclibc/lib/
+
+#
+# Target
+#
+EXEC = ffdb 
+#
+# Objs
+#
+OBJS = ffdb.o
+#
+# Build Shared/static
+#
+SHARED = yes
+#SHARED = no
+#
+#
+DEFINES = -DLINUX -DARM -DMOBI
+
+LIBS            = 
+LIBS_INC        =  
+
+#LIBS_INC	= 
+ 
+# debug
+DBG = -O1
+#DBG = -ggdb -O0
+ 
+ifeq ($(SHARED),yes)
+#LDFLAGS=-g  
+LDFLAGS=-g  
+else
+LDFLAGS+= -v -Wl,-warn-common --static  
+endif
+ 
+CFLAGS +=  $(DBG) $(DEFINES) -I/opt/mobilygen/tools/arm-merlin-linux-uclibc/i686-linux/arm-merlin-linux-uclibc/include
+
+all: $(EXEC)
+	mkdir -p /tmp/bin
+	cp $< /tmp/bin/
+ 
+$(EXEC): $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS) $(LIBS_INC) $(LIBS)
+	cp $@ $@_g
+	$(STRIP) $@
+ 
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+ 
+clean:
+	-rm -f $(EXEC) $(EXEC)_g *.elf *.gdb *.o
+ 
+install:
+	cp $(EXEC) $(PREFIX)/bin
+
+
+	 
