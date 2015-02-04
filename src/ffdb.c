@@ -329,7 +329,6 @@ read_list(char *file_name, SEARCH *search_list)
 	char	line[MAX_LINE_SIZE];
 	char	*tline;
 	char	key[MAX_LINE_SIZE];
-    char    *ptr;
 
 	if(xml) printf("<database>\n");
 
@@ -581,7 +580,7 @@ read_db(char *file_name, char *key, char *value, int max_val_len)
 	char	*subst;
 	int		ret=0;
 	char	line[MAX_LINE_SIZE];
-    char    *ptr;
+//    char    *ptr;
 
 	// Read from file
 	if(NULL == (fp = fopen( (char *) file_name, "r")) )
