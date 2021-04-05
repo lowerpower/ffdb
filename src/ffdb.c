@@ -1,9 +1,9 @@
 //
 // ffdb - Flat File Database for Embedded devices
 //
-// (c)2009 Yoics Inc.
+// (c)2009 Mycal.net.
 //
-// mike@yoics
+// mike@mycal
 //
 
 
@@ -68,7 +68,7 @@ char	user_tmp[MAX_FILE_SIZE];
 
 void program_info(void)
 {
-	printf("FlatFileDataBase (c)2010-12 Yoics (www.yoics.com)\n");
+	printf("FlatFileDataBase (c)2010-12 Mycal (www.mycal.net)\n");
 	printf("  Version " VERSION " built " __DATE__ " at " __TIME__ "\n\n");
 }
 
